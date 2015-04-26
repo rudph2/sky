@@ -1,0 +1,98 @@
+<% require 'pry'
+   require 'pry-debugger' %>
+<h1>Bill</h1>
+<h2>Summary</h2>
+<table>
+  <tr>
+    <th>Bill Generated Date</th>
+    <th>Payment Due Date</th>
+    <th>Date from</th>
+    <th>Date to</th>
+    <th>Total</th>
+  </tr>
+  <tr>
+    <td>
+      <%= @report.statement_generated_date.to_s %></td><td>
+    <%= @report.statement_due.to_s %></td><td>
+    <%= @report.period_start.to_s %></td><td>
+    <%= @report.period_end.to_s %></td><td>
+    <%= @report.bill_total.to_s %></td>
+  </tr>
+</table>
+<h2>Package</h2>
+<h3>Subscriptions</h3>
+<table>
+  <tr>
+    <th>Subscription Type</th>
+    <th>Subscription Name</th>
+    <th>Subscription Cost</th>
+  </tr>
+  <% @report.subscriptions.each do |subscription| %>
+      <tr>
+        <td>
+          <%= subscription[:type].to_s %></td><td>
+        <%= subscription[:name].to_s %></td><td>
+        <%= subscription[:cost].to_s %></td>
+      </tr>
+  <% end %>
+  <tr>
+    <td></td><td></td><td></td>
+  <tr>
+  <tr>
+    <td>Subscription Total</td><td></td><td>
+    <%= @report.subscription_total.to_s %></td>
+  </tr>
+</table>
+<h3>Call charges</h3>
+<table>
+  <tr>
+    <th>Number Called</th>
+    <th>Duration</th>
+    <th>Cost</th>
+  </tr>
+  <% @report.calls.each do |call| %>
+      <tr>
+        <td>
+          <%= call[:called].to_s %></td><td>
+        <%= call[:duration].to_s %></td><td>
+        <%= call[:cost].to_s %></td>
+      </tr>
+  <% end %>
+  <tr>
+    <td></td><td></td><td></td>
+  <tr>
+  <tr>
+    <td>Call Charges Total</td><td></td><td>
+    <%= @report.call_total %></td>
+  </tr>
+</table>
+<h3>SkyStore</h3>
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Title</th>
+    <th>Cost</th>
+  </tr>
+  <% @report.rentals.each do |rental| %>
+      <tr>
+        <td> Rental</td>
+        <td><%= rental[:title].to_s %></td>
+        <td><%= rental[:cost].to_s %></td>
+      </tr>
+  <% end %>
+  <% @report.buy_and_keep.each do |item| %>
+      <tr>
+        <td> Buy and Keep</td>
+        <td><%= item[:title].to_s %></td>
+        <td><%= item[:cost].to_s %></td>
+      </tr>
+  <% end %>
+  <tr>
+    <td></td><td></td><td></td>
+  <tr>
+  <tr>
+    <td>Sky Store Total</td><td></td><td>
+    <%= @report.skystore_total %></td>
+  </tr>
+</table>
+<% binding.pry %>
