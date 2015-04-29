@@ -1,8 +1,6 @@
 module Sky
   module Adapters
     class SkyEndpointAdapter
-      attr_accessor :name, :transactions, :value
-
       def get_response_for(endpoint)
         conn = Faraday.new(:url => 'http://safe-plains-5453.herokuapp.com/bill.json') do |faraday|
           faraday.request  :url_encoded
