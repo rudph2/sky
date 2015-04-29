@@ -7,7 +7,6 @@ module Sky
 
       def build_report
         bill = @endpoint_provider.get_bill
-
         sky_bill_dto = ::Sky::Dto::SkyBill.new
         sky_bill_dto.bill_total = bill[:total]
         sky_bill_dto.buy_and_keep = bill[:skyStore][:buyAndKeep]
@@ -17,7 +16,7 @@ module Sky
         sky_bill_dto.period_start = bill[:statement][:period][:from]
         sky_bill_dto.rentals = bill[:skyStore][:rentals]
         sky_bill_dto.skystore_total = bill[:skyStore][:total]
-        sky_bill_dto.statement_due = bill[:statement][:generated]
+        sky_bill_dto.statement_due = bill[:statement][:due]
         sky_bill_dto.statement_generated_date = bill[:statement][:generated]
         sky_bill_dto.subscriptions = bill[:package][:subscriptions]
         sky_bill_dto.subscription_total = bill[:package][:total]
