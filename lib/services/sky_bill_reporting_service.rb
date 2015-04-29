@@ -1,15 +1,12 @@
-#require 'pry'
-#require 'pry-debugger'
-
 module Sky
   module Services
     class SkyBillReportingService
-      def initialize
-        @sky_endpoint_provider = ::Sky::ResourceProviders::SkyEndpointResourceProvider.new
+      def initialize(dependencies)
+        @endpoint_provider = dependencies[:endpoint_resource_provider] || ::Sky::ResourceProviders::SkyEndpointResourceProvider.new({})
       end
 
       def build_report
-        bill = @sky_endpoint_provider.get_bill
+        bill = @endpoint_provider.get_bill
 
         sky_bill_dto = ::Sky::Dto::SkyBill.new
         sky_bill_dto.bill_total = bill[:total]
