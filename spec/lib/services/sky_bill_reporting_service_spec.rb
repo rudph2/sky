@@ -54,7 +54,7 @@ describe ::Sky::Services::SkyBillReportingService do
   end
 
   it 'encapsulates statement_due' do
-    expect(subject.build_report.statement_due).to eq parsed_customer_bill[:statement][:generated]
+    expect(subject.build_report.statement_due).to eq parsed_customer_bill[:statement][:due]
   end
 
   it 'encapsulates statement_generated_date' do
